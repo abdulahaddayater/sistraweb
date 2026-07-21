@@ -1,0 +1,169 @@
+.footer {
+  background: var(--color-charcoal-deep);
+  color: var(--color-ivory);
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-lg);
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 3rem;
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-border-dark);
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+}
+
+.story {
+  color: rgba(250, 248, 245, 0.62);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  max-width: 22rem;
+}
+
+.social {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.social a {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity var(--transition), color var(--transition);
+}
+
+.social a:hover {
+  opacity: 1;
+  color: var(--color-gold);
+}
+
+.heading {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.25rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.links a,
+.links li {
+  font-size: 0.92rem;
+  color: rgba(250, 248, 245, 0.68);
+  transition: color var(--transition);
+}
+
+.links a:hover {
+  color: var(--color-ivory);
+}
+
+.newsCopy {
+  font-size: 0.92rem;
+  color: rgba(250, 248, 245, 0.62);
+  margin-bottom: 1rem;
+  max-width: 18rem;
+}
+
+.form {
+  display: flex;
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.form input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  color: var(--color-ivory);
+  padding: 0.85rem 1rem;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.form input::placeholder {
+  color: rgba(250, 248, 245, 0.4);
+}
+
+.form input:focus {
+  outline: none;
+}
+
+.form button {
+  padding: 0.85rem 1.1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.form button:hover {
+  background: var(--color-gold);
+  color: var(--color-charcoal-deep);
+}
+
+.thanks {
+  color: var(--color-gold);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.policies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.15rem;
+}
+
+.policies a {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 245, 0.45);
+  transition: color var(--transition);
+}
+
+.policies a:hover {
+  color: var(--color-ivory);
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  font-size: 0.78rem;
+  color: rgba(250, 248, 245, 0.4);
+}
+
+@media (max-width: 960px) {
+  .top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .bottom {
+    flex-direction: column;
+  }
+}

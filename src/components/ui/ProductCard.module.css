@@ -1,0 +1,117 @@
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--color-ivory-soft);
+  margin-bottom: 1.25rem;
+}
+
+.imageLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.primary {
+  opacity: 1;
+}
+
+.secondary {
+  opacity: 0;
+}
+
+.media:hover .primary {
+  opacity: 0;
+}
+
+.media:hover .secondary {
+  opacity: 1;
+}
+
+.wish {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 2;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(250, 248, 245, 0.88);
+  color: var(--color-charcoal);
+  transition:
+    color var(--transition),
+    background-color var(--transition);
+}
+
+.wish:hover,
+.wished {
+  color: var(--color-gold);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.collection {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-charcoal-muted);
+  font-weight: 400;
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.name a:hover {
+  color: var(--color-gold);
+}
+
+.price {
+  font-size: 0.95rem;
+  color: var(--color-charcoal-muted);
+  margin-bottom: 0.65rem;
+}
+
+.cta {
+  min-height: 2.5rem;
+  padding: 0.6rem 1.35rem;
+  font-size: 0.65rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+  }
+
+  .media:hover .primary {
+    opacity: 1;
+  }
+
+  .media:hover .secondary {
+    opacity: 0;
+  }
+}

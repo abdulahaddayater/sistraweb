@@ -1,0 +1,22 @@
+.section {
+  text-align: center;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  max-width: 16ch;
+  margin-inline: auto;
+}
+
+.copy {
+  font-size: 1.08rem;
+  color: var(--color-charcoal-muted);
+  margin-inline: auto;
+  margin-bottom: 2rem;
+  max-width: 38rem;
+}
