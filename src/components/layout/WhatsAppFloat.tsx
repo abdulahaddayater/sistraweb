@@ -1,6 +1,6 @@
 import styles from "./WhatsAppFloat.module.css";
 
-const WHATSAPP_URL = "https://wa.me/8007668786";
+const WHATSAPP_URL = "https://wa.me/918007668786";
 
 export function WhatsAppFloat() {
   return (
