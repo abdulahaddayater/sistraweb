@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { WishlistProvider } from "../../hooks/useWishlist";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { WhatsAppFloat } from "./WhatsAppFloat";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -46,6 +47,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </WishlistProvider>
   );
 }
