@@ -31,7 +31,7 @@ export function ContactPage() {
               Dubai, United Arab Emirates
             </p>
             <p>
-              <a href="tel:+97144000000">+971 4 400 0000</a>
+              <a href="tel:8007668786">800 766 8786</a>
               <br />
               <a href="mailto:concierge@sistradiamonds.com">
                 concierge@sistradiamonds.com

@@ -52,7 +52,7 @@ export function Footer() {
             <li>Dubai Design District</li>
             <li>Building 6, Suite 210</li>
             <li>
-              <a href="tel:+97144000000">+971 4 400 0000</a>
+              <a href="tel:8007668786">800 766 8786</a>
             </li>
             <li>
               <a href="mailto:concierge@sistradiamonds.com">
