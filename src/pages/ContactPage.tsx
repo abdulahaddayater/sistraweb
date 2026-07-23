@@ -1,41 +1,29 @@
-import { useState, type FormEvent } from "react";
 import { FadeIn } from "../components/ui/FadeIn";
+import { Button } from "../components/ui/Button";
 import { PageHero } from "../components/ui/PageHero";
 import styles from "./ContactPage.module.css";
 
+const WHATSAPP_APPOINTMENT_URL =
+  "https://wa.me/918007668786?text=" +
+  encodeURIComponent(
+    "Hello Sistra Diamonds,\n\nI would like to book a private appointment. Please share the available times.",
+  );
+
 export function ContactPage() {
-  const [sent, setSent] = useState(false);
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSent(true);
-  };
-
   return (
     <>
       <PageHero
         eyebrow="Contact"
         title="Private appointments & enquiries"
-        lead="We welcome you to our Dubai atelier, or arrange a confidential consultation by telephone or video."
+        lead="Arrange a confidential consultation by telephone or WhatsApp."
       />
 
       <section className={`section ${styles.section}`}>
         <div className={`container ${styles.grid}`}>
           <FadeIn className={styles.details}>
-            <h2>Atelier</h2>
-            <p>
-              Dubai Design District
-              <br />
-              Building 6, Suite 210
-              <br />
-              Dubai, United Arab Emirates
-            </p>
+            <h2>Contact</h2>
             <p>
               <a href="tel:8007668786">800 766 8786</a>
-              <br />
-              <a href="mailto:concierge@sistradiamonds.com">
-                concierge@sistradiamonds.com
-              </a>
             </p>
             <p className={styles.hours}>
               Sunday – Thursday · 10:00 – 19:00
@@ -44,47 +32,21 @@ export function ContactPage() {
             </p>
           </FadeIn>
 
-          <FadeIn delay={100} className={styles.formWrap}>
-            {sent ? (
-              <p className={styles.success} role="status">
-                Thank you. Our concierge will respond within one business day.
-              </p>
-            ) : (
-              <form className={styles.form} onSubmit={onSubmit} noValidate={false}>
-                <div className={styles.row}>
-                  <div className={styles.field}>
-                    <label htmlFor="name">Full name</label>
-                    <input id="name" name="name" required autoComplete="name" />
-                  </div>
-                  <div className={styles.field}>
-                    <label htmlFor="email">Email</label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                    />
-                  </div>
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="interest">Interest</label>
-                  <select id="interest" name="interest" defaultValue="appointment">
-                    <option value="appointment">Private appointment</option>
-                    <option value="engagement">Engagement rings</option>
-                    <option value="bespoke">Bespoke commission</option>
-                    <option value="other">General enquiry</option>
-                  </select>
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="message">Message</label>
-                  <textarea id="message" name="message" rows={5} required />
-                </div>
-                <button type="submit" className={styles.submit}>
-                  Send Enquiry
-                </button>
-              </form>
-            )}
+          <FadeIn delay={100} className={styles.booking}>
+            <span className="eyebrow">WhatsApp</span>
+            <h2 className={styles.bookingTitle}>Book your appointment on WhatsApp</h2>
+            <p className={styles.bookingCopy}>
+              Message our concierge directly to reserve a private viewing or
+              discuss a piece from the collection.
+            </p>
+            <Button
+              href={WHATSAPP_APPOINTMENT_URL}
+              variant="solid"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book on WhatsApp
+            </Button>
           </FadeIn>
         </div>
       </section>

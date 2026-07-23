@@ -3,7 +3,8 @@ import { Button } from "../ui/Button";
 import { heroImages } from "../../data/products";
 import styles from "./Hero.module.css";
 
-const SLIDE_MS = 5000;
+/** Each image stays fully visible for this long before changing */
+const HOLD_MS = 3000;
 
 export function Hero() {
   const [index, setIndex] = useState(0);
@@ -11,11 +12,23 @@ export function Hero() {
   useEffect(() => {
     if (heroImages.length < 2) return;
 
-    const id = window.setInterval(() => {
-      setIndex((current) => (current + 1) % heroImages.length);
-    }, SLIDE_MS);
+    let cancelled = false;
+    let timeoutId = 0;
 
-    return () => window.clearInterval(id);
+    const scheduleNext = () => {
+      timeoutId = window.setTimeout(() => {
+        if (cancelled) return;
+        setIndex((current) => (current + 1) % heroImages.length);
+        scheduleNext();
+      }, HOLD_MS);
+    };
+
+    scheduleNext();
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+    };
   }, []);
 
   return (
@@ -25,11 +38,7 @@ export function Hero() {
           <img
             key={src}
             src={src}
-            alt={
-              i === index
-                ? "Sistra Diamonds fine jewellery"
-                : ""
-            }
+            alt={i === index ? "Sistra Diamonds fine jewellery" : ""}
             className={`${styles.image} ${i === index ? styles.active : ""}`}
             fetchPriority={i === 0 ? "high" : "low"}
             loading={i === 0 ? "eager" : "lazy"}

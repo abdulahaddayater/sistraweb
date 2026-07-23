@@ -16,8 +16,8 @@ export function BrandIntro() {
           shape them into pieces of enduring proportion — for those who prefer
           presence over spectacle.
         </p>
-        <Button to="/about" variant="outline">
-          Discover Our Story
+        <Button to="/collections" variant="outline">
+          View Our Collections
         </Button>
       </FadeIn>
     </section>

@@ -94,7 +94,16 @@
 
 @media (max-width: 900px) {
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 0.75rem;
+  }
+
+  .card h2 {
+    font-size: 1.15rem;
+  }
+
+  .excerpt {
+    display: none;
   }
 }
 

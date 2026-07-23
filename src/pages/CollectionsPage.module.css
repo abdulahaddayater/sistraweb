@@ -29,6 +29,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
 }
 
 .tagline {
@@ -62,9 +63,41 @@
 }
 
 @media (max-width: 800px) {
+  .list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 0.75rem;
+  }
+
   .item,
   .item:nth-child(even) {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     direction: ltr;
+    align-items: stretch;
+  }
+
+  .media {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+  }
+
+  .tagline {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .content h2 {
+    font-size: 1.15rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .content p {
+    display: none;
+  }
+
+  .content a {
+    font-size: 0.6rem;
   }
 }

@@ -42,9 +42,15 @@
 @media (max-width: 860px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: 1.75rem;
   }
 
   .media {
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 4 / 5;
+    max-height: 420px;
+  }
+
+  .media img {
+    object-position: center center;
   }
 }

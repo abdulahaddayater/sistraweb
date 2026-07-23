@@ -31,7 +31,6 @@ export function Footer() {
             <a href="https://pinterest.com" target="_blank" rel="noreferrer" aria-label="Pinterest">
               Pinterest
             </a>
-            <a href="mailto:concierge@sistradiamonds.com">Email</a>
           </div>
         </div>
 
@@ -49,15 +48,8 @@ export function Footer() {
         <div>
           <p className={styles.heading}>Contact</p>
           <ul className={styles.links}>
-            <li>Dubai Design District</li>
-            <li>Building 6, Suite 210</li>
             <li>
               <a href="tel:8007668786">800 766 8786</a>
-            </li>
-            <li>
-              <a href="mailto:concierge@sistradiamonds.com">
-                concierge@sistradiamonds.com
-              </a>
             </li>
           </ul>
         </div>

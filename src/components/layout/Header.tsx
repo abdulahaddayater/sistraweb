@@ -30,7 +30,9 @@ export function Header() {
   const solid = !isHome || scrolled || open;
 
   return (
-    <header className={`${styles.header} ${solid ? styles.solid : styles.transparent}`}>
+    <header
+      className={`${styles.header} ${solid ? styles.solid : styles.transparent} ${open ? styles.menuOpen : ""}`}
+    >
       <div className={`container-wide ${styles.inner}`}>
         <button
           type="button"
@@ -49,11 +51,7 @@ export function Header() {
           <span className={styles.logoSub}>Diamonds</span>
         </Link>
 
-        <nav
-          id="primary-nav"
-          className={`${styles.nav} ${open ? styles.navOpen : ""}`}
-          aria-label="Primary"
-        >
+        <nav className={styles.desktopNav} aria-label="Primary">
           <ul className={styles.navList}>
             {navLinks.map((link) => (
               <li key={link.path}>
@@ -74,6 +72,32 @@ export function Header() {
         <Link to="/contact" className={styles.book}>
           Private Appointment
         </Link>
+      </div>
+
+      <div
+        id="primary-nav"
+        className={`${styles.mobileMenu} ${open ? styles.mobileMenuOpen : ""}`}
+        aria-hidden={!open}
+      >
+        <nav className={styles.mobileNav} aria-label="Mobile">
+          <ul className={styles.mobileList}>
+            {navLinks.map((link) => (
+              <li key={link.path}>
+                <NavLink
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `${styles.mobileLink} ${isActive ? styles.active : ""}`
+                  }
+                  end={link.path === "/"}
+                  tabIndex={open ? 0 : -1}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </header>
   );
