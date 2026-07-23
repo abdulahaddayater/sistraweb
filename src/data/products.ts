@@ -74,7 +74,7 @@ const img = {
 
 export const siteImages = {
   hero: img.p13,
-  craft: img.p01,
+  craft: img.p11,
   about: img.p15,
   diamond: img.p10,
   ring1: img.p01,
