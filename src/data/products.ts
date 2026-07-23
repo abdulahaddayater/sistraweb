@@ -85,6 +85,9 @@ export const siteImages = {
   bracelet2: img.p03,
 };
 
+/** All folder images for the hero slideshow */
+export const heroImages = Object.values(img);
+
 export const products: Product[] = [
   {
     id: "1",

@@ -1,20 +1,44 @@
+import { useEffect, useState } from "react";
 import { Button } from "../ui/Button";
-import { siteImages } from "../../data/products";
+import { heroImages } from "../../data/products";
 import styles from "./Hero.module.css";
 
+const SLIDE_MS = 2000;
+
 export function Hero() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (heroImages.length < 2) return;
+
+    const id = window.setInterval(() => {
+      setIndex((current) => (current + 1) % heroImages.length);
+    }, SLIDE_MS);
+
+    return () => window.clearInterval(id);
+  }, []);
+
   return (
     <section className={styles.hero} aria-label="Hero">
-      <div className={styles.media}>
-        <img
-          src={siteImages.hero}
-          alt="Sistra Diamonds fine jewellery on warm stone"
-          className={styles.image}
-          fetchPriority="high"
-          decoding="async"
-          width={2000}
-          height={1333}
-        />
+      <div className={styles.media} aria-live="polite">
+        {heroImages.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt={
+              i === index
+                ? "Sistra Diamonds fine jewellery"
+                : ""
+            }
+            className={`${styles.image} ${i === index ? styles.active : ""}`}
+            fetchPriority={i === 0 ? "high" : "low"}
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+            width={2000}
+            height={1333}
+            aria-hidden={i !== index}
+          />
+        ))}
         <div className={styles.veil} aria-hidden="true" />
       </div>
 
