@@ -16,10 +16,9 @@ export interface Product {
   id: string;
   slug: string;
   name: string;
-  price: number;
   category: CategorySlug;
   collection: string;
-  images: [string, string];
+  images: string[];
   description: string;
   materials: string;
   diamondSpecs: DiamondSpecs;
@@ -34,243 +33,342 @@ export const categoryLabels: Record<CategorySlug, string> = {
   bracelets: "Bracelets",
 };
 
-export const formatPrice = (price: number): string =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(price);
+const WHATSAPP_NUMBER = "918007668786";
 
-/** Curated Unsplash jewellery photography */
+export function getWhatsAppInquiryUrl(product: Product): string {
+  const message = [
+    `Hello Sistra Diamonds,`,
+    ``,
+    `I would like to enquire about:`,
+    `• Product: ${product.name}`,
+    `• Collection: ${product.collection}`,
+    `• Category: ${categoryLabels[product.category]}`,
+    `• Materials: ${product.materials}`,
+    `• Diamond: ${product.diamondSpecs.carat}, ${product.diamondSpecs.cut} cut, Color ${product.diamondSpecs.color}, Clarity ${product.diamondSpecs.clarity}`,
+    `• Certification: ${product.diamondSpecs.certification}`,
+    ``,
+    `Please share availability and further details.`,
+  ].join("\n");
+
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+/** Local Sistra product imagery */
 const img = {
-  ring1:
-    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=80",
-  ring1b:
-    "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80",
-  ring2:
-    "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1200&q=80",
-  ring2b:
-    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=80",
-  ring3:
-    "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1200&q=80",
-  ring3b:
-    "https://images.unsplash.com/photo-1608042314453-ae338dce87d2?auto=format&fit=crop&w=1200&q=80",
-  necklace1:
-    "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1200&q=80",
-  necklace1b:
-    "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=80",
-  necklace2:
-    "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80",
-  necklace2b:
-    "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=1200&q=80",
-  earring1:
-    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1200&q=80",
-  earring1b:
-    "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1200&q=80",
-  earring2:
-    "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=1200&q=80",
-  earring2b:
-    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=80",
-  bracelet1:
-    "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=1200&q=80",
-  bracelet1b:
-    "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=1200&q=80",
-  bracelet2:
-    "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1200&q=80",
-  bracelet2b:
-    "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=80",
-  hero: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=2000&q=85",
-  craft:
-    "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1400&q=80",
-  about:
-    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1400&q=80",
-  diamond:
-    "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1200&q=80",
+  p01: "/products/product-01.jpg",
+  p02: "/products/product-02.jpg",
+  p03: "/products/product-03.jpg",
+  p04: "/products/product-04.jpg",
+  p05: "/products/product-05.jpg",
+  p06: "/products/product-06.jpg",
+  p07: "/products/product-07.jpg",
+  p08: "/products/product-08.jpg",
+  p09: "/products/product-09.jpg",
+  p10: "/products/product-10.jpg",
+  p11: "/products/product-11.jpg",
+  p12: "/products/product-12.jpg",
+  p13: "/products/product-13.jpg",
+  p14: "/products/product-14.jpg",
+  p15: "/products/product-15.jpg",
 };
 
-export const siteImages = img;
+export const siteImages = {
+  hero: img.p13,
+  craft: img.p01,
+  about: img.p15,
+  diamond: img.p10,
+  ring1: img.p01,
+  necklace1: img.p06,
+  earring1: img.p14,
+  bracelet1: img.p03,
+  ring2: img.p15,
+  bracelet2: img.p03,
+};
 
 export const products: Product[] = [
   {
     id: "1",
-    slug: "aurora-solitaire",
-    name: "Aurora Solitaire",
-    price: 12800,
+    slug: "oval-solitaire-gold",
+    name: "Oval Solitaire in Yellow Gold",
     category: "engagement-rings",
-    collection: "Celestial",
-    images: [img.ring1, img.ring1b],
+    collection: "Signature Rings",
+    images: [img.p01],
     description:
-      "A luminous round brilliant set in hand-polished platinum. The Aurora Solitaire is defined by quiet proportion — a single diamond held by a claw setting refined over months of atelier study.",
-    materials: "Platinum 950, Round brilliant diamond",
+      "A luminous oval-cut diamond held in a refined four-prong yellow gold setting. Quiet proportion, exceptional fire, and timeless presence.",
+    materials: "Yellow gold, Oval-cut diamond",
     diamondSpecs: {
-      carat: "1.50 ct",
-      cut: "Excellent",
-      color: "D",
-      clarity: "VVS1",
-      certification: "GIA",
+      carat: "Available upon enquiry",
+      cut: "Oval brilliant",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
     },
     bestSeller: true,
     featured: true,
   },
   {
     id: "2",
-    slug: "noir-halo",
-    name: "Noir Halo",
-    price: 18500,
-    category: "engagement-rings",
-    collection: "Maison Noir",
-    images: [img.ring2, img.ring2b],
+    slug: "floral-marquise-set",
+    name: "Floral Marquise Necklace & Earrings",
+    category: "necklaces",
+    collection: "Bridal Atelier",
+    images: [img.p02],
     description:
-      "A halo of pavé diamonds frames a central brilliant, creating depth and radiance. Crafted for those who seek presence without excess.",
-    materials: "18k white gold, Round brilliant diamonds",
+      "A matching necklace and earring set in a leaf-inspired marquise motif, finished with a pear-cut drop at the centre — crafted for ceremonies and evenings.",
+    materials: "White metal, Marquise & pear-cut stones",
     diamondSpecs: {
-      carat: "2.10 ct total",
-      cut: "Excellent",
-      color: "E",
-      clarity: "VS1",
-      certification: "GIA",
+      carat: "Set total upon enquiry",
+      cut: "Marquise & pear",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
     },
     bestSeller: true,
+    featured: true,
   },
   {
     id: "3",
-    slug: "sahara-band",
-    name: "Sahara Band",
-    price: 6400,
-    category: "engagement-rings",
+    slug: "vine-leaf-bracelet",
+    name: "Vine Leaf Bracelet",
+    category: "bracelets",
     collection: "Desert Light",
-    images: [img.ring3, img.ring3b],
+    images: [img.p03],
     description:
-      "Inspired by dune lines at dusk. A slender band set with a continuous row of diamonds — understated, architectural, endlessly wearable.",
-    materials: "18k yellow gold, Round brilliant diamonds",
+      "A delicate vine bracelet with leaf accents and fine stone glints — light enough for everyday, refined enough for evening.",
+    materials: "White metal, Round brilliant accents",
     diamondSpecs: {
-      carat: "0.85 ct total",
-      cut: "Very Good",
-      color: "F",
-      clarity: "VS2",
-      certification: "IGI",
+      carat: "Accent stones",
+      cut: "Round brilliant",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
     },
     featured: true,
   },
   {
     id: "4",
-    slug: "lumen-pendant",
-    name: "Lumen Pendant",
-    price: 9200,
+    slug: "sapphire-teardrop-halo",
+    name: "Sapphire Teardrop Halo Necklace",
     category: "necklaces",
     collection: "Celestial",
-    images: [img.necklace1, img.necklace1b],
+    images: [img.p04],
     description:
-      "A floating diamond on a fine chain of white gold. The Lumen Pendant is designed to catch light with every movement — intimate luxury for day and evening.",
-    materials: "18k white gold, Round brilliant diamond",
+      "A deep blue teardrop stone framed in a brilliant halo, suspended from a fine chain with crystal floral clusters.",
+    materials: "White metal, Blue sapphire-tone centre, Halo accents",
     diamondSpecs: {
-      carat: "0.75 ct",
-      cut: "Excellent",
-      color: "D",
-      clarity: "VVS2",
-      certification: "GIA",
+      carat: "Centre & halo upon enquiry",
+      cut: "Pear / teardrop",
+      color: "Deep blue centre",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
     },
     bestSeller: true,
-    featured: true,
   },
   {
     id: "5",
-    slug: "oasis-collar",
-    name: "Oasis Collar",
-    price: 24600,
+    slug: "floral-bow-necklace",
+    name: "Floral Bow Necklace",
     category: "necklaces",
-    collection: "Desert Light",
-    images: [img.necklace2, img.necklace2b],
+    collection: "Bridal Atelier",
+    images: [img.p05],
     description:
-      "An architectural collar of graduated diamonds. Each stone is set to follow the curve of the collarbone — a signature of Sistra craftsmanship.",
-    materials: "18k yellow gold, Round brilliant diamonds",
+      "A romantic gold-tone necklace with a crystal bow centre and floral vine accents along a soft, organic chain.",
+    materials: "Yellow gold tone, Crystal accents",
     diamondSpecs: {
-      carat: "4.20 ct total",
-      cut: "Excellent",
-      color: "E–F",
-      clarity: "VS1–VS2",
-      certification: "GIA",
+      carat: "Accent stones",
+      cut: "Round brilliant accents",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
     },
   },
   {
     id: "6",
-    slug: "étoile-drops",
-    name: "Étoile Drops",
-    price: 7800,
-    category: "earrings",
+    slug: "gold-solitaire-pendant",
+    name: "Gold Solitaire Pendant",
+    category: "necklaces",
     collection: "Celestial",
-    images: [img.earring1, img.earring1b],
+    images: [img.p06],
     description:
-      "Drop earrings of exceptional clarity. Suspended diamonds move with a soft cadence — refined for soirées and ceremonies alike.",
-    materials: "Platinum 950, Round brilliant diamonds",
+      "A classic round brilliant on a fine gold chain — minimal, luminous, and endlessly wearable.",
+    materials: "Yellow gold, Round brilliant diamond",
     diamondSpecs: {
-      carat: "1.20 ct total",
-      cut: "Excellent",
-      color: "D",
-      clarity: "VVS1",
-      certification: "GIA",
+      carat: "Available upon enquiry",
+      cut: "Round brilliant",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
     },
     bestSeller: true,
+    featured: true,
   },
   {
     id: "7",
-    slug: "mirage-studs",
-    name: "Mirage Studs",
-    price: 4200,
-    category: "earrings",
-    collection: "Maison Noir",
-    images: [img.earring2, img.earring2b],
+    slug: "solitaire-carat-guide-gold",
+    name: "Solitaire Pendant — Carat Guide (Gold)",
+    category: "necklaces",
+    collection: "Celestial",
+    images: [img.p07],
     description:
-      "Classic studs elevated by ideal cut and precise setting. Everyday brilliance with house-level finish.",
-    materials: "18k white gold, Round brilliant diamonds",
+      "Compare solitaire pendant sizes in yellow gold: 0.1ct, 0.3ct, 0.5ct, and 1ct. Enquire to select your preferred carat.",
+    materials: "Yellow gold, Round brilliant diamonds",
     diamondSpecs: {
-      carat: "0.80 ct total",
-      cut: "Excellent",
-      color: "E",
-      clarity: "VS1",
-      certification: "IGI",
+      carat: "0.1ct – 1ct options",
+      cut: "Round brilliant",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
+    },
+  },
+  {
+    id: "8",
+    slug: "solitaire-carat-guide-classic",
+    name: "Solitaire Pendant — Classic Carat Guide",
+    category: "necklaces",
+    collection: "Celestial",
+    images: [img.p08],
+    description:
+      "A size reference for gold solitaire pendants in 0.25ct, 0.50ct, 0.75ct, and 1.0ct — choose the scale that suits you.",
+    materials: "Yellow gold, Round brilliant diamonds",
+    diamondSpecs: {
+      carat: "0.25ct – 1.0ct options",
+      cut: "Round brilliant",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
+    },
+  },
+  {
+    id: "9",
+    slug: "solitaire-carat-guide-white",
+    name: "Solitaire Pendant — White Metal Guide",
+    category: "necklaces",
+    collection: "Maison Noir",
+    images: [img.p09],
+    description:
+      "White metal solitaire pendants shown in 0.50ct, 1.00ct, 1.50ct, and 2.00ct for effortless comparison.",
+    materials: "White metal, Round brilliant diamonds",
+    diamondSpecs: {
+      carat: "0.50ct – 2.00ct options",
+      cut: "Round brilliant",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
+    },
+  },
+  {
+    id: "10",
+    slug: "mixed-cut-pendant-edit",
+    name: "Mixed Cut Pendant Edit",
+    category: "necklaces",
+    collection: "Celestial",
+    images: [img.p10],
+    description:
+      "An edit of fine pendants spanning emerald, cushion, oval blue, and round cuts across white, rose, and yellow gold.",
+    materials: "Yellow, rose & white metal; mixed diamond & gem cuts",
+    diamondSpecs: {
+      carat: "Available upon enquiry",
+      cut: "Emerald, cushion, oval, round",
+      color: "Clear & blue options",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
     },
     featured: true,
   },
   {
-    id: "8",
-    slug: "riviera-tennis",
-    name: "Riviera Tennis",
-    price: 16800,
-    category: "bracelets",
+    id: "11",
+    slug: "signature-cut-pendants",
+    name: "Signature Cut Pendants",
+    category: "necklaces",
     collection: "Celestial",
-    images: [img.bracelet1, img.bracelet1b],
+    images: [img.p11],
     description:
-      "A continuous line of matched diamonds on a flexible platinum setting. The Riviera Tennis bracelet is our most requested signature piece.",
-    materials: "Platinum 950, Round brilliant diamonds",
+      "Six signature diamond shapes on delicate gold chains — marquise, princess, pear, oval, cushion, and emerald.",
+    materials: "Yellow gold, Mixed-cut diamonds",
     diamondSpecs: {
-      carat: "5.00 ct total",
-      cut: "Excellent",
-      color: "F",
-      clarity: "VS1",
-      certification: "GIA",
+      carat: "Available upon enquiry",
+      cut: "Marquise, princess, pear, oval, cushion, emerald",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
+    },
+    bestSeller: true,
+  },
+  {
+    id: "12",
+    slug: "classic-cut-solitaires",
+    name: "Classic Cut Solitaire Pendants",
+    category: "necklaces",
+    collection: "Maison Noir",
+    images: [img.p12],
+    description:
+      "Four classic solitaire silhouettes in white metal — princess, round, emerald, and pear — for a precise, architectural look.",
+    materials: "White metal, Mixed-cut diamonds",
+    diamondSpecs: {
+      carat: "Available upon enquiry",
+      cut: "Princess, round, emerald, pear",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
+    },
+  },
+  {
+    id: "13",
+    slug: "yellow-gold-ring-atelier",
+    name: "Yellow Gold Ring Atelier",
+    category: "engagement-rings",
+    collection: "Signature Rings",
+    images: [img.p13],
+    description:
+      "A curated line of yellow gold engagement rings — solitaires, halos, three-stone, emerald, pear, and square cuts.",
+    materials: "Yellow gold, Mixed-cut diamonds",
+    diamondSpecs: {
+      carat: "Available upon enquiry",
+      cut: "Round, oval, emerald, pear, square",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
     },
     bestSeller: true,
     featured: true,
   },
   {
-    id: "9",
-    slug: "dune-cuff",
-    name: "Dune Cuff",
-    price: 11200,
-    category: "bracelets",
-    collection: "Desert Light",
-    images: [img.bracelet2, img.bracelet2b],
+    id: "14",
+    slug: "diamond-stud-collection",
+    name: "Diamond Stud Collection",
+    category: "earrings",
+    collection: "Celestial",
+    images: [img.p14],
     description:
-      "A sculptural cuff with a single row of diamonds along its crest. Warm gold meets cool fire — a dialogue of desert and light.",
-    materials: "18k yellow gold, Round brilliant diamonds",
+      "A selection of diamond studs in round, oval, and emerald cuts — from intimate everyday sizes to statement brilliance.",
+    materials: "Yellow gold, Round / oval / emerald-cut diamonds",
     diamondSpecs: {
-      carat: "1.80 ct total",
-      cut: "Very Good",
-      color: "E",
-      clarity: "VS2",
-      certification: "GIA",
+      carat: "Multiple sizes available",
+      cut: "Round, oval, emerald",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
     },
+    bestSeller: true,
+  },
+  {
+    id: "15",
+    slug: "oval-pave-engagement-ring",
+    name: "Oval Pavé Engagement Ring",
+    category: "engagement-rings",
+    collection: "Signature Rings",
+    images: [img.p15],
+    description:
+      "An oval centre diamond on a pavé band in warm gold — soft fire along the shank, quiet luxury at the centre.",
+    materials: "Rose / yellow gold, Oval-cut diamond, Pavé accents",
+    diamondSpecs: {
+      carat: "Available upon enquiry",
+      cut: "Oval brilliant",
+      color: "Selected by atelier",
+      clarity: "Selected by atelier",
+      certification: "Available upon enquiry",
+    },
+    featured: true,
   },
 ];
 

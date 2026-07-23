@@ -2,9 +2,9 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import {
   categoryLabels,
-  formatPrice,
   getProductBySlug,
   getRelatedProducts,
+  getWhatsAppInquiryUrl,
 } from "../data/products";
 import { useWishlist } from "../hooks/useWishlist";
 import { Button } from "../components/ui/Button";
@@ -78,31 +78,37 @@ export function ProductPage() {
               decoding="async"
             />
           </div>
-          <div className={styles.thumbs} role="tablist" aria-label="Product images">
-            {product.images.map((src, i) => (
-              <button
-                key={src}
-                type="button"
-                role="tab"
-                aria-selected={active === i}
-                className={`${styles.thumb} ${active === i ? styles.thumbActive : ""}`}
-                onClick={() => setActive(i)}
-              >
-                <img src={src} alt="" loading="lazy" width={160} height={200} />
-              </button>
-            ))}
-          </div>
+          {product.images.length > 1 ? (
+            <div className={styles.thumbs} role="tablist" aria-label="Product images">
+              {product.images.map((src, i) => (
+                <button
+                  key={src}
+                  type="button"
+                  role="tab"
+                  aria-selected={active === i}
+                  className={`${styles.thumb} ${active === i ? styles.thumbActive : ""}`}
+                  onClick={() => setActive(i)}
+                >
+                  <img src={src} alt="" loading="lazy" width={160} height={200} />
+                </button>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         <div className={styles.info}>
           <p className={styles.collection}>{product.collection}</p>
           <h1>{product.name}</h1>
-          <p className={styles.price}>{formatPrice(product.price)}</p>
           <p className={styles.summary}>{product.description}</p>
 
           <div className={styles.actions}>
-            <Button to="/contact" variant="solid">
-              Enquire Privately
+            <Button
+              href={getWhatsAppInquiryUrl(product)}
+              variant="solid"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Inquiry
             </Button>
             <button
               type="button"

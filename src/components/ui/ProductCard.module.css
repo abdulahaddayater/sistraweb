@@ -34,11 +34,11 @@
   opacity: 0;
 }
 
-.media:hover .primary {
+.hasHover:hover .primary {
   opacity: 0;
 }
 
-.media:hover .secondary {
+.hasHover:hover .secondary {
   opacity: 1;
 }
 
@@ -84,16 +84,11 @@
   font-size: 1.55rem;
   font-weight: 400;
   line-height: 1.2;
+  margin-bottom: 0.85rem;
 }
 
 .name a:hover {
   color: var(--color-gold);
-}
-
-.price {
-  font-size: 0.95rem;
-  color: var(--color-charcoal-muted);
-  margin-bottom: 0.65rem;
 }
 
 .cta {
@@ -107,11 +102,11 @@
     transition: none;
   }
 
-  .media:hover .primary {
+  .hasHover:hover .primary {
     opacity: 1;
   }
 
-  .media:hover .secondary {
+  .hasHover:hover .secondary {
     opacity: 0;
   }
 }

@@ -1,22 +1,20 @@
-import { siteImages } from "../../data/products";
+import { Link } from "react-router-dom";
+import { products } from "../../data/products";
 import { FadeIn } from "../ui/FadeIn";
 import styles from "./InstagramGallery.module.css";
 
-const gallery = [
-  { src: siteImages.ring1, alt: "Aurora Solitaire detail" },
-  { src: siteImages.necklace1, alt: "Lumen Pendant worn" },
-  { src: siteImages.earring1, alt: "Étoile Drops" },
-  { src: siteImages.bracelet1, alt: "Riviera Tennis bracelet" },
-  { src: siteImages.ring2, alt: "Noir Halo ring" },
-  { src: siteImages.craft, alt: "Atelier craftsmanship" },
-];
+const gallery = products.slice(0, 6).map((product) => ({
+  src: product.images[0],
+  alt: product.name,
+  slug: product.slug,
+}));
 
 export function InstagramGallery() {
   return (
     <section className={`section section--soft ${styles.section}`} aria-labelledby="gallery-heading">
       <div className="container">
         <FadeIn className={styles.header}>
-          <span className="eyebrow">@sistradiamonds</span>
+          <span className="eyebrow">Gallery</span>
           <h2 id="gallery-heading" className="section-title">
             Moments from the maison
           </h2>
@@ -25,11 +23,9 @@ export function InstagramGallery() {
 
       <FadeIn className={styles.grid}>
         {gallery.map((item) => (
-          <a
-            key={item.src}
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            key={item.slug}
+            to={`/product/${item.slug}`}
             className={styles.item}
             aria-label={item.alt}
           >
@@ -41,7 +37,7 @@ export function InstagramGallery() {
               width={500}
               height={500}
             />
-          </a>
+          </Link>
         ))}
       </FadeIn>
     </section>

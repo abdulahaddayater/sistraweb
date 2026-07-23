@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/products";
-import { formatPrice } from "../../data/products";
 import { useWishlist } from "../../hooks/useWishlist";
 import { Button } from "./Button";
 import styles from "./ProductCard.module.css";
@@ -13,10 +12,11 @@ interface ProductCardProps {
 export function ProductCard({ product, priority = false }: ProductCardProps) {
   const { has, toggle } = useWishlist();
   const wished = has(product.id);
+  const secondary = product.images[1];
 
   return (
     <article className={styles.card}>
-      <div className={styles.media}>
+      <div className={`${styles.media} ${secondary ? styles.hasHover : ""}`}>
         <Link
           to={`/product/${product.slug}`}
           className={styles.imageLink}
@@ -31,22 +31,28 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             width={600}
             height={750}
           />
-          <img
-            src={product.images[1]}
-            alt=""
-            className={`${styles.image} ${styles.secondary}`}
-            loading="lazy"
-            decoding="async"
-            width={600}
-            height={750}
-            aria-hidden="true"
-          />
+          {secondary ? (
+            <img
+              src={secondary}
+              alt=""
+              className={`${styles.image} ${styles.secondary}`}
+              loading="lazy"
+              decoding="async"
+              width={600}
+              height={750}
+              aria-hidden="true"
+            />
+          ) : null}
         </Link>
         <button
           type="button"
           className={`${styles.wish} ${wished ? styles.wished : ""}`}
           onClick={() => toggle(product.id)}
-          aria-label={wished ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
+          aria-label={
+            wished
+              ? `Remove ${product.name} from wishlist`
+              : `Add ${product.name} to wishlist`
+          }
           aria-pressed={wished}
         >
           <HeartIcon filled={wished} />
@@ -57,7 +63,6 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
         <h3 className={styles.name}>
           <Link to={`/product/${product.slug}`}>{product.name}</Link>
         </h3>
-        <p className={styles.price}>{formatPrice(product.price)}</p>
         <Button to={`/product/${product.slug}`} variant="outline" className={styles.cta}>
           View Details
         </Button>
