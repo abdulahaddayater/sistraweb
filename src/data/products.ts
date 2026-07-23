@@ -73,8 +73,8 @@ const img = {
 };
 
 export const siteImages = {
-  hero: img.p13,
-  craft: img.p11,
+  hero: img.p04,
+  craft: img.p04,
   about: img.p15,
   diamond: img.p10,
   ring1: img.p01,
@@ -85,8 +85,24 @@ export const siteImages = {
   bracelet2: img.p03,
 };
 
-/** All folder images for the hero slideshow */
-export const heroImages = Object.values(img);
+/** All folder images for the hero slideshow — first image is the opening slide */
+export const heroImages = [
+  img.p04,
+  img.p01,
+  img.p02,
+  img.p03,
+  img.p05,
+  img.p06,
+  img.p07,
+  img.p08,
+  img.p09,
+  img.p10,
+  img.p11,
+  img.p12,
+  img.p13,
+  img.p14,
+  img.p15,
+];
 
 export const products: Product[] = [
   {
