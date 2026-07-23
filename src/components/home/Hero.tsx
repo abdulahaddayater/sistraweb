@@ -3,7 +3,7 @@ import { Button } from "../ui/Button";
 import { heroImages } from "../../data/products";
 import styles from "./Hero.module.css";
 
-const SLIDE_MS = 2000;
+const SLIDE_MS = 4000;
 
 export function Hero() {
   const [index, setIndex] = useState(0);

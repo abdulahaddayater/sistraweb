@@ -20,11 +20,16 @@
   object-fit: cover;
   object-position: center center;
   opacity: 0;
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(1.04);
+  transition:
+    opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .image.active {
   opacity: 1;
+  transform: scale(1);
   z-index: 1;
 }
 
@@ -112,6 +117,11 @@
 @media (prefers-reduced-motion: reduce) {
   .image {
     transition: none;
+    transform: none;
+  }
+
+  .image.active {
+    transform: none;
   }
 
   .content {
